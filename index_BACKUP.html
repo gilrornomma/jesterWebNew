@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jester Global</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    #canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Ensure this is below the z-index of overlay */
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      /* overflow: hidden; */
+      background: #252526;
+    }
+    #overlay {
+        position: relative; /* changed from absolute to relative */
+        /* height: 100%; Change this if necessary, depending on your design */
+        min-height: 100vh; /* This ensures the overlay is at least as tall as the viewport */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: white;
+        font-family: 'Arial', sans-serif;
+        z-index: 10;
+    }
+    nav {
+        position: sticky;
+        will-change: background-color, height, padding;
+        transform-origin: top;
+        height: 110px;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em; /* Default vertical padding */
+        background-color: rgba(0, 0, 0, 0); /* Start with transparent background */
+        transition: background-color 2s ease-in-out, height 2s ease-in-out, padding 2s ease-in-out;
+    }
+
+    nav.scrolled {
+        background-color: black, 100; /* Change to black when scrolled */
+        height: 75px; /* Reduced height */
+        padding: 0.75em; /* Reduced padding */
+    }
+
+    nav .navigation-links, nav .user-actions {
+        display: flex;
+    }
+    
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px; /* Adjust spacing around links as necessary */
+    }
+    .logo {
+        flex-grow: 1;
+        text-align: center;
+    }
+    .logo img {
+        max-width: 250px; /* Adjust as necessary for your logo's size */
+        height: auto;
+        transition: width 2s ease, transform 2s ease;
+    }
+    .logo img.shrunk {
+        transition: all 2s;
+        transform: scale(0.75);
+    }
+    .headline {
+      text-align: center;
+      margin-top: 100px;
+    }
+    .headline h1 {
+      font-size: 2.5em;
+    }
+    .cta-buttons {
+      text-align: center;
+    }
+    .cta-buttons button {
+      margin: 0 10px;
+      padding: 10px 20px;
+      background: none;
+      border: 1px solid white;
+      color: white;
+      cursor: pointer;
+    }
+    .footer {
+      text-align: center;
+      padding: 1em;
+    }
+    nav.scrolled {
+      background-color: rgb(21, 21, 21);
+      transition: background-color 0.3s;
+    }
+
+    /* Styles for additional content */
+    .content-section {
+      min-height: 150vh; /* Minimum height to create scrollable content */
+      color: white;
+      padding: 2em;
+    }
+
+    /* Style for the fake articles or updates */
+    .update-card {
+      background-color: #333;
+      padding: 1em;
+      margin-bottom: 1em;
+    }
+  </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+  <div id="overlay" style="z-index: 10;">
+    <nav> 
+      <div>
+        <!-- Navigation links with placeholder Latin text -->
+        <a href="#">Lorem</a>
+        <a href="#">Ipsum</a>
+        <a href="#">Dolor</a>
+      </div>
+      <div class="logo">
+        <img src="img/logo.png" alt="Jester Logo">
+        </div>
+      <div>
+        <!-- These could be login/search or any other links you need -->
+        <a href="#">Sit</a>
+        <a href="#">Amet</a>
+        <a href="#">Consectetur</a>
+      </div>
+    </nav>
+    <div class="headline">
+      <h1>Introducing Jester: Lorem Ipsum Dolor</h1>
+      <button>Learn more about Jester</button>
+    </div>
+    <div class="cta-buttons">
+      <!-- Call to action buttons with Latin text -->
+      <button>Adipiscing Elit</button>
+      <button>Sed Do Eiusmod</button>
+      <button>Tempor Incididunt</button>
+    </div>
+    <div class="footer">
+      <a href="#">Ut Enim Ad Minim</a>
+    </div>
+  </div>
+  <!-- Additional content section starts here -->
+  <div class="content-section">
+    <h2>Latest updates</h2>
+    <!-- Example content cards -->
+    <div class="update-card">Update 1</div>
+    <div class="update-card">Update 2</div>
+    <!-- ... additional content ... -->
+  </div>
+  <script>
+
+    // Global variables for our Jester particles
+    let particles = [];
+    let numParticles = 69; // double 69, heh, nice.
+    let particleColor;
+    let colorIndex = 0;
+    let diamondColors = ['#323233', '#2d2d2e', '#2b2b2c', '#272728', '#242424', '#29292a'];
+    let diamondGrid;
+    let colorChangeInterval = 5000; // 5 seconds between color changes
+    let lastColorChangeTime = 0;
+    let glowGraphic;
+    let neonColors 
+
+    function setup() {
+        let canvasHeight = windowHeight * 0.75; // 60% of the viewport height
+        let canvas = createCanvas(windowWidth, canvasHeight);
+        canvas.parent('canvas-container');
+        canvas.style('z-index', '5');
+        pixelDensity(1)
+        logoArea = {
+            x: windowWidth / 2 - 125, // Centered, half-width to the left
+            y: windowHeight / 2 - 50,  // Adjust this value as needed for the vertical position
+            w: 250,                    // Width of the logo area
+            h: 100                     // Height of the logo area
+        };
+        noStroke();
+        neonColors = [
+            color(255, 0, 255), // Neon Pink
+            color(0, 255, 255), // Neon Cyan
+            color(255, 255, 0), // Neon Yellow
+            color(0, 255, 0),   // Neon Green
+            color(255, 165, 0), // Neon Orange
+            color(255, 0, 0),   // Neon Red
+            color(0, 255, 127), // Neon Spring Green
+            color(255, 20, 147), // Neon Deep Pink
+            color(0, 191, 255), // Neon Deep Sky Blue
+            color(180, 0, 255), // Neon Purple
+            color(255, 105, 180), // Neon Hot Pink
+            color(132, 255, 0)  // Neon Chartreuse
+            ];
+        // Create Jester particles and initialize them
+        for (let i = 0; i < numParticles; i++) {
+        particles.push(new Particle());
+        }
+        particleColor = color(242, 242, 235);
+
+        // Create and prepare a pre-rendered glow effect only once
+            glowGraphic = createGraphics(80, 80); // Adjust size as needed
+            glowGraphic.pixelDensity(1); // Handle high-DPI displays
+            glowGraphic.noStroke();
+            glowGraphic.fill(255, 255, 255, 100); // White with some transparency
+            glowGraphic.ellipse(glowGraphic.width / 2, glowGraphic.height / 2, 60); // Draw a white circle
+            glowGraphic.filter(BLUR, 10); // Blur the circle to create a glow effect
+            //diamond grid
+            diamondGrid = createDiamondGrid();
+            
+            diamondGrid.forEach(diamond => {
+            diamond.color = color(random(diamondColors));
+            diamond.targetColor = color(random(diamondColors));
+            diamond.changeTime = millis();
+            diamond.changeDuration = random(2000, 5000); // between 2 and 5 seconds
+        });
+    }
+
+    function draw() {
+    let currentTime = millis();
+    background(0);
+    
+    // Draw the glow behind the logo
+    push();
+    translate(logoArea.x + logoArea.w / 2, logoArea.y + logoArea.h / 2); // Adjust position as needed
+    tint(255, 100); // Adjust glow color and intensity as needed
+    imageMode(CENTER);
+    image(glowGraphic, 0, 0, logoArea.w * 1.5, logoArea.h * 1.5); // Adjust size as needed
+    noTint();
+    pop();
+
+    // Draw the diamond grid
+    diamondGrid.forEach(drawDiamond);
+
+    // Check and resolve collisions
+    checkParticlesCollision();
+
+    // Update and display particles
+    particles.forEach((particle) => {
+        particle.update();
+        particle.edges();
+        particle.display();
+    });
+}
+
+    function createDiamondGrid() {
+        let grid = [];
+        // The width of the diamond at its widest point
+        let diamondWidth = 50;
+        // The height of the diamond
+        let diamondHeight = diamondWidth;
+
+        // Determine the horizontal and vertical spacing
+        let horizontalSpacing = diamondWidth;
+        let verticalSpacing = diamondHeight;
+
+        for (let x = 0; x < width + diamondWidth; x += horizontalSpacing) {
+            for (let y = 0; y < height + diamondHeight; y += verticalSpacing) {
+                // Stagger every other row by half the width of the diamond
+                let staggerOffsetX = (Math.floor(y / verticalSpacing) % 2) * (diamondWidth / 2);
+                staggerOffsetX = Math.round(staggerOffsetX); // Round to the nearest pixel to align properly
+                let posX = Math.round(x + staggerOffsetX);
+                let posY = Math.round(y);
+                grid.push({
+                    x: posX,
+                    y: posY,
+                    size: diamondWidth,
+                    color: color(random(diamondColors)),
+                    targetColor: color(random(diamondColors)),
+                    changeTime: millis(),
+                    changeDuration: random(2000, 5000)
+                });
+            }
+        }
+        return grid;
+    }
+
+    function drawDiamond(diamond) {
+    let elapsed = millis() - diamond.changeTime;
+    let t = map(elapsed, 0, diamond.changeDuration, 0, 1);
+    t = constrain(t, 0, 1);
+
+    if (t >= 1) {
+        diamond.color = diamond.targetColor;
+        diamond.targetColor = color(random(diamondColors));
+        diamond.changeTime = millis();
+        // Reset the timer and pick a new target color
+        t = 0;
+    }
+
+    // Interpolate between the current color and the target color
+    let displayColor = lerpColor(diamond.color, diamond.targetColor, t);
+
+    fill(displayColor);
+    strokeWeight(0);
+    noStroke();
+    push();
+    translate(diamond.x, diamond.y);
+
+    beginShape();
+    vertex(0, -diamond.size); // Top vertex
+    vertex(diamond.size / 2, 0); // Right vertex
+    vertex(0, diamond.size); // Bottom vertex
+    vertex(-diamond.size / 2, 0); // Left vertex
+    endShape(CLOSE);
+
+    pop();
+}
+
+    // Function to check for collisions between all particles
+    function checkParticlesCollision() {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+            particles[i].checkCollision(particles[j]);
+            }
+        }
+    }
+
+    // Change particle color randomly on mouse press, I thought of maybe doing just our brand colors but we can change it
+    function mousePressed() {
+            // Change the glow color for all particles when the mouse is pressed
+            let newGlowColor = random(neonColors);
+            particles.forEach(particle => {
+            particle.glowColor = newGlowColor;
+        });
+    }
+
+    // Toggle particle following behavior with the 'J' key (because J for Jester boyyyyyy)
+    function keyPressed() {
+    if (key === 'j' || key === 'J') {
+        particles.forEach(particle => {
+        particle.following = !particle.following;
+        });
+    }
+    }
+
+    // Resize canvas on window resize cuz ya neva know
+    function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+    }
+
+    class Particle {
+        constructor() {
+            this.position = createVector(random(width), random(height));
+            this.velocity = createVector(random(-2, 2), random(-2, 2));
+            this.size = random(8, 25);
+            this.maxSpeed = 5;
+            this.following = false;
+            this.glowColor = color(255, 100);
+        }
+        
+        update() {
+            this.steerAwayFromLogo();
+
+            if (this.following) {
+            this.followMouse();
+            } else {
+            this.position.add(this.velocity);
+            }
+            this.avoidMouse();
+        }
+
+        drawGlow() {
+            push();
+            translate(this.position.x, this.position.y);
+            tint(this.glowColor); // Use the particle's glowColor
+            imageMode(CENTER);
+            image(glowGraphic, 0, 0, this.size * 3, this.size * 3);
+            noTint();
+            pop();
+        }
+
+        steerAwayFromLogo() {
+            // Calculate the center point of the logo area
+            const logoCenterX = windowWidth / 2;
+            const logoCenterY = windowHeight / 2; // Adjust as necessary
+            const buffer = 150; // How close the particles can get to the logo area
+
+            // Determine the edges of the logo area "repulsion zone"
+            const leftEdge = logoCenterX - logoArea.w / 2 - buffer;
+            const rightEdge = logoCenterX + logoArea.w / 2 + buffer;
+            const topEdge = logoCenterY - logoArea.h / 2 - buffer;
+            const bottomEdge = logoCenterY + logoArea.h / 2 + buffer;
+
+            // Check if the particle is approaching the logo area and steer it away
+            if (this.position.x > leftEdge && this.position.x < rightEdge &&
+                this.position.y > topEdge && this.position.y < bottomEdge) {
+
+            // Create a repulsion force that pushes the particle away from the logo area
+            let repulsion = createVector(this.position.x - logoCenterX, this.position.y - logoCenterY);
+            repulsion.setMag(this.maxSpeed);
+            this.velocity.lerp(repulsion, 0.1);
+            }
+        }
+        followMouse() {
+            let target = createVector(mouseX, mouseY);
+            let force = p5.Vector.sub(target, this.position);
+            force.normalize();
+            force.mult(0.5);
+            this.velocity.lerp(force, 0.2);
+            this.position.add(this.velocity);
+        }
+
+        avoidMouse() {
+            let mouse = createVector(mouseX, mouseY);
+            let dir = p5.Vector.sub(this.position, mouse);
+            let d = dir.mag();
+            if (d < 50) {
+            dir.setMag(this.maxSpeed);
+            this.velocity.lerp(dir, 0.2);
+            } else {
+            this.velocity.lerp(createVector(random(-2, 2), random(-2, 2)), 0.05);
+            }
+            this.position.add(this.velocity);
+        }
+
+        checkCollision(other) {
+            let d = dist(this.position.x, this.position.y, other.position.x, other.position.y);
+            let sizeSum = (this.size / 2 * 1.5) + (other.size / 2 * 1.5);
+            if (d < sizeSum) {
+            let overlap = sizeSum - d;
+            let correctionVector = p5.Vector.sub(this.position, other.position).normalize().mult(overlap / 2);
+            this.position.add(correctionVector);
+            other.position.sub(correctionVector);
+
+            let thisToOther = p5.Vector.sub(other.position, this.position).normalize();
+            let otherToThis = p5.Vector.sub(this.position, other.position).normalize();
+            let adjustmentStrength = 0.5;
+            this.velocity.lerp(otherToThis, adjustmentStrength * (overlap / sizeSum));
+            other.velocity.lerp(thisToOther, adjustmentStrength * (overlap / sizeSum));
+            }
+        }
+
+        edges() {
+            if (this.position.x < 0 || this.position.x > width) {
+            this.velocity.x *= -1;
+            }
+            if (this.position.y < 0 || this.position.y > height) {
+            this.velocity.y *= -1;
+            }
+        }
+
+        display() {
+            fill(particleColor);
+            let halfWidth = this.size / 2;
+            let halfHeight = this.size / 2 * 1.5;
+            this.drawGlow();
+            noStroke();
+
+            push();
+            translate(this.position.x, this.position.y);
+            beginShape();
+            vertex(0, -halfHeight);
+            vertex(halfWidth, 0);
+            vertex(0, halfHeight);
+            vertex(-halfWidth, 0);
+            endShape(CLOSE);
+
+            rotate(PI / 2);
+            beginShape();
+            vertex(0, -halfHeight);
+            vertex(halfWidth, 0);
+            vertex(0, halfHeight);
+            vertex(-halfWidth, 0);
+            endShape(CLOSE);
+            pop();
+        }
+    }
+
+// JavaScript for dynamic navbar color change on scroll
+window.addEventListener('scroll', function() {
+    var nav = document.querySelector('nav');
+    var logo = document.querySelector('.logo img');
+    if (window.scrollY > window.innerHeight * 0.3) {
+        nav.classList.add('scrolled');
+        logo.classList.add('shrunk');
+    } else {
+        nav.classList.remove('scrolled');
+        logo.classList.remove('shrunk');
+    }
+});
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,852 @@
+    /* 
+    font-family: "gravesend-sans", sans-serif;
+font-weight: 700;
+font-style: normal;
+
+    font-family: "gravesend-sans", sans-serif;
+font-weight: 500;
+font-style: normal;
+
+    */ 
+    a:hover, button:hover {
+        cursor: url('img/Jester_Hand_2.png'), auto;
+    }
+    
+    a {
+        color: inherit; 
+        text-decoration: none; 
+        cursor: url('img/Jester_Hand_2.png'), auto;
+    }
+    #canvas-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      /* overflow: hidden; */
+      background: black;  
+      color: white; 
+      cursor: url('img/Jester_Cursor_Alt2.png'), auto; 
+    }
+    :root {
+        --container-scale: 1; 
+    }
+    #overlay {
+        position: relative; 
+        min-height: 66vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        color: white;
+        font-family: 'Arial', sans-serif;
+        z-index: 10;
+    }
+    .divider {
+        content: '';
+        display: block;
+        height: 2px;
+        background-image: linear-gradient(to right, transparent, #f2f2eb, transparent);
+        margin: 25px auto; 
+        width: 85%; 
+    }
+    .divider-small {
+        content: '';
+        display: block;
+        height: 1px;
+        background-image: linear-gradient(to right, transparent, #f2f2eb, transparent);
+        margin: 25px auto; 
+        width: 60%; 
+    }
+    .roadmap-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto; 
+        max-width: 960px; 
+        width: 100%; 
+    }
+    .roadmap-header::before,
+    .roadmap-header::after {
+        content: '';
+        flex-grow: 1;
+        height: 1px;
+        background-image: linear-gradient(to right, transparent, #f2f2eb, transparent);
+        margin: 0 20px;
+    }
+    
+    .roadmap-title {
+        padding: 0 20px;
+        color: #fff;
+        /* your additional styling here */
+    }
+    .social-links {
+        text-align: center;
+        padding: 0px 0;
+    }
+    
+    .social-links a {
+        margin: 0 25px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .social-logo {
+        width: 75px;
+        height: auto;
+        transition: transform 0.3s ease, opacity 0.3s ease; 
+    }
+    
+    .social-logo:hover,
+    .social-logo:focus {
+        opacity: 0.7;
+        transform: scale(1.2); 
+    }
+    nav {
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0); 
+        font-family: "gravesend-sans", sans-serif;
+        font-size: 24px;
+        z-index: 10;
+        padding: 1em; 
+        transition: background-color 0.5s ease, padding 0.5s ease; 
+    }
+    .nav-section {
+        flex: 1;
+        display: flex;
+        justify-content: space-around; 
+        align-items: center;
+        font-family: "gravesend-sans", sans-serif;
+        font-weight: 500;
+        font-style: normal;
+        text-transform: uppercase;
+    }
+    .logo-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 1s ease; 
+    }
+    .logo-container img {
+        height: auto; 
+        max-width: 500px; 
+        transition: max-width 1s ease;
+    }
+    .navLink { 
+        font-family: "gravesend-sans", sans-serif;
+        color: #f2f2eb;
+        letter-spacing: 0.7px;
+        font-size: 1em; 
+        transition: font-size 0.3s ease-in-out; 
+    }
+    .navLink:hover { 
+        font-size: 1.2em;
+        transition: font-size 0.3s ease-in-out; 
+    }
+    nav.scrolled {
+        padding: 0.25em 1em; 
+        background-color: black; 
+    }
+    nav.scrolled .logo-container {
+        transform: scale(0.6); 
+    }
+    nav.scrolled .logo-container img {
+        max-width: 200px; 
+    }
+    #launch-app {
+        cursor: pointer;
+        font-family: "gravesend-sans", sans-serif;
+        letter-spacing: -1.5px;
+        color: #f2f2eb;
+        background-color: transparent;
+        border: 2px solid #f2f2eb;
+        padding: 0.5em 1em;
+        font-size: 1em;
+        text-decoration: none;
+        display: inline-block; 
+        transition: all 0.3s ease-in-out;
+        border-radius: 0px; 
+        text-align: center; 
+        white-space: nowrap;
+    }
+    
+    #launch-app:hover, #launch-app:focus {
+        background-color: #888c89;
+        color: #f2f2eb;
+        border-color: #888c89;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px; 
+    }
+    .menu-container {
+        display: none;
+        flex-direction: column; 
+        align-items: center; 
+        transition: max-height 0.3s ease;
+        overflow: hidden; 
+        max-height: 0; 
+    }
+    .hamburger-menu {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 1em; /* Adjust size as needed */
+        /* Adjust position as needed, e.g., right: 10px; top: 10px; */
+    }
+    .menu-container.active {
+        display: flex; /* Display the menu */
+    }
+    
+    .hamburger-menu .bar {
+        display: block;
+        width: 25px; /* Width of the bars */
+        height: 3px; /* Height of the bars */
+        background-color: white; /* Color of the bars */
+        margin: 5px 0; /* Spacing between the bars */
+        transition: 0.3s;
+    }
+    
+    #headline-section {
+        display: flex;
+        position: relative;
+        width: 50%; /* Adjust the width to your preference */
+        max-width: 1200px; /* Maximum width of the section */
+        align-items: center;
+        justify-content: flex-start;
+        margin: auto; /* Centers the container */
+        z-index: 2;
+    }
+    
+    .headline-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .image-container {
+        margin: 0 auto; /* Adjust the space between image containers */
+        text-align: center; /* Center the content inside the container */
+        max-width: 15vw;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    .headline-image {
+        width: 15vw; /* Make the image fill the container */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover;
+        max-width: 250px;
+    }
+    
+    .headlineButton {
+        font-family: "gravesend-sans", sans-serif; 
+        color: #f2f2eb; /* Text color */
+        background-color: transparent; /* No background to look like text */
+        border: 2px solid #f2f2eb; /* White border */
+        padding: 0.25em 0.25em; /* Padding inside the button */
+        text-decoration: none; /* No underline */
+        display: block; /* To enable padding and dimensions */
+        margin-top: 0.5em; /* Space above the button */
+        cursor: pointer; /* Cursor to indicate it's clickable */
+        transition: all 0.3s ease; /* Smooth transition for hover effects */
+        /* letter-spacing: -1.5px; */
+        text-align: center;
+        border-radius: 0px;
+        font-size: 1.2em;
+        /* font-weight: bold;*/
+        text-transform: uppercase;
+        transition: border-radius 0.3s ease-in-out;
+    }
+    
+    .roundable {
+        transition: border-radius 0.3s ease-in-out; /* Smooth transition for border-radius changes */
+    }
+    
+    .headlineButton:hover, .headlineButton:focus {
+        background-color: #888c89; /* Background on hover/focus */
+        color: #f2f2eb; /* Text color on hover/focus */
+        text-decoration: none; /* Ensure no underline on hover/focus */
+        border-color: #888c89; /* Border color on hover/focus */
+        border-radius: 10px;
+        transition: border-radius 0.3s ease-in-out;
+    }
+    .cta-buttons {
+      text-align: center;
+    }
+    .cta-buttons button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        background: none;
+        border: 1px solid white;
+        color: white;
+        cursor: pointer;
+        font-family: "gravesend-sans", sans-serif;
+        font-weight: 900;
+        font-style: bold;
+    }
+    .content-section {
+      min-height: 105vh; /* Minimum height to create scrollable content */
+      color: white;
+      padding: 2em;
+    }
+    .update-card {
+      background-color: #333;
+      padding: 1em;
+      margin-bottom: 1em;
+    }
+    footer {
+        background-color: #252526;
+        color: #f2f2eb;
+        text-align: center;
+        padding: 20px 0;
+        width: 100%;
+    }
+    .footer-links a {
+        color: #f2f2eb;
+        text-decoration: none;
+        margin: 0 15px;
+    }
+    .footer-logo {
+        margin-bottom: 20px;
+        height: 40px;
+    }
+    .footer-disclaimer {
+        font-size: 0.8em;
+        margin-top: 20px;
+        line-height: 1.4;
+    }
+    .about-section {
+        background-color: #000;
+        color: #fff;
+        font-family: 'Monsteratt', sans-serif;
+        padding: 10px;
+        text-align: center; /* Center everything in the about section */
+    }
+    
+    .centered-container {
+    text-align: center; /* Center text of children */
+    margin-top: 50px;
+    }
+    
+    .left-title {
+    font-size: 2em; /* Size of the title */
+    margin-bottom: 10px; /* Spacing between the title and blurb */
+    
+    }
+    
+    .about-blurb {
+    font-family: 'open-sans', sans-serif;
+    font-size: 1.2em; /* Size of the blurb text */
+    max-width: 75vw; /* Maximum width of the blurb, adjust as needed */
+    margin: 10px auto; /* Center the blurb in the container */
+    }
+    
+    .container {
+    text-align: center;
+    }
+    .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 1fr; /* Makes all rows equal height */
+    gap: 20px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    }
+    
+    .grid-item {
+    background: #252526;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex; /* Use flexbox layout inside grid item */
+    flex-direction: column; /* Arrange children of the grid item in a column */
+    justify-content: flex-start; /* Align children to the start (top) of the cross axis */
+    align-items: center; /* Center children along the cross axis */
+    }
+    
+    .about-subtitle {
+    color: #f2f2eb;
+    margin-bottom: 15px; /* Space below subtitles */
+    width: 100%; /* Ensure the title takes up the full width */
+    text-align: center; /* Center-align the title text */
+    }
+    
+    .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px; /* Space between list and paragraph */
+    position: relative;
+    text-decoration: none;
+    }
+    
+    .features-list:after {
+    content: '';
+    display: block;
+    height: 2px;
+    width: 100%; /* Line full width under the list */
+    background-image: linear-gradient(to right, transparent, #f2f2eb, transparent);
+    position: absolute;
+    bottom: -20px; /* Position the line below the list */
+    left: 0;
+    }
+    
+    .features-list li {
+    font-family: 'open-sans', sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    line-height: 1.6;
+    }
+    
+    /* JEST SECTION */
+    
+    .jest-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Split into two equal columns */
+    gap: 20px;
+    max-width: 1400px;
+    margin: 50px auto;
+    align-items: center;
+    text-decoration: none;
+    }
+    
+    .tool-title::after {
+    content: "⌄"; /* Unicode character for a down arrow */
+    font-size: 1.2em; /* Adjust size as needed */
+    margin-left: 10px; /* Space between the title and the arrow */
+    display: inline-block; /* Align with the inline flow of text */
+    transition: transform 0.3s; /* Animation for when toggled */
+    }
+    /* When the info is active, rotate the arrow to indicate collapse action */
+    .tool-title.active::after {
+    transform: rotate(180deg); /* Flips the arrow to point upwards */
+    }
+    .jest-image {
+    display: flex;
+    justify-content: flex-end; /* Aligns image to the right side of the column */
+    padding-right: 5%; /* Adds some padding to prevent the image from touching the grid gap */
+    }
+    
+    .jest-image img {
+    width: 100%;
+    border-radius: 100px; /* Adds rounded corners to the image */
+    object-fit: cover; /* This will cover the area of the grid without stretching the image */
+    max-width: 200px;
+    }
+    .jest-info {
+    padding-left: 5%;
+    font-size: 0.8em;
+    font-family: 'Open+Sans', serif;
+    text-decoration: none;
+    }
+    .jest-content {
+    display: flex;
+    flex-direction: column;
+    }
+    .jest-section-title {
+    font-size: 2em; /* Adjust the size of the title to your preference */
+    margin-bottom: 0.5em; /* Space between the title and the list */
+    max-width: 70%;
+    }
+    .jest-section-text {
+    font-size: 1.5em; /* Adjust the size of the title to your preference */
+    margin-bottom: 0.5em; /* Space between the title and the list */
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center; /* This centers the text within its container */
+    font-family: "open-sans", sans-serif;
+    }
+    @media (max-width: 768px) {
+    .jest-container {
+    grid-template-columns: 1fr; /* Stack image and content on top of each other on small screens */
+    text-align: center;
+    }
+    
+    .jest-image {
+    justify-content: center; /* Center the image in the container on small screens */
+    padding-right: 0; /* Remove right padding on small screens */
+    margin-bottom: 20px; /* Add some space below the image */
+    }
+    
+    .jest-image img {
+    width: 50%; /* Resize image to be 50% of its container */
+    max-width: 150px; /* Set a maximum width to prevent the image from being too large */
+    }
+    }
+    
+    /* Tiers Section Styling */
+    .jester-tiers-header {
+    text-align: center;
+    margin-bottom: 30px;
+    }
+    
+    .jester-tiers-title {
+    display: inline-block;
+    background-color: #252526; /* Matches existing section headers */
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #f2f2eb;
+    font-size: 1.5em;
+    font-family: 'gravesend-sans', sans-serif;
+    }
+    
+    .jester-tiers-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 50px auto;
+    max-width: 1200px;
+    }
+    
+    .jester-tier-column {
+    background-color: #333; /* Slightly darker than section backgrounds */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: calc(33.333% - 20px);
+    color: #f2f2eb;
+    margin: 25px;
+    text-align: center;
+    }
+    
+    .jester-tier-title {
+    background-color: #444; /* Header background within tier */
+    color: #f2f2eb;
+    text-align: center;
+    padding: 15px;
+    margin: -20px -20px 30px -20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    }
+    
+    .jester-tier-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+    
+    .jester-tier-list-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #474747;
+    font-size: 1em;
+    }
+    
+    .jester-tier-buy-button {
+    background-color: #4CAF50; /* Button color */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    }
+    .jest-section-text {
+    font-size: 0.75em;
+    }
+    
+    .tier-list-disabled {
+    color: #838383; /* Dimmed color for disabled features */
+    text-decoration: line-through; /* The line through the text */
+    }
+    .jester-tier-buy-button:hover {
+    background-color: #45a049; /* Darker on hover */
+    }
+    
+    @media (max-width: 768px) {
+    .jester-tiers-header {
+        margin-bottom: 20px; /* Adjusted margin below "Tiers" heading for medium screens */
+    }
+    
+    .jester-tier-column {
+        margin-bottom: 20px; /* Adjusted margin below each tier box for medium screens */
+    }
+    }
+    
+    @media (max-width: 480px) {
+    .jester-tiers-header {
+        margin-bottom: 15px; /* Adjusted margin below "Tiers" heading for very small screens */
+    }
+    
+    .jester-tier-column {
+        width: 90%;
+        margin: 15px auto; /* Adjusted margin for very small screens */
+    }
+    }
+    
+    
+    /* List section */
+    .link-list {
+    list-style-type: none; /* Remove default list styling */
+    padding: 0; /* Remove padding */
+    margin-top: 25px; /* Adjust margin as needed */
+    text-align: center; /* Center the list */
+    }
+    
+    .link-list li {
+    display: inline; /* Display list items inline */
+    margin-right: 10px; /* Space between items */
+    }
+    
+    .link-list li::after {
+    content: "|";
+    margin-left: 10px;
+    }
+    
+    .link-list li:last-child::after {
+    content: ""; /* No content for the last item to avoid trailing separator */
+    }
+    
+    /* TOOLS SECTION */
+    .tools-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px; /* Adjust the padding as needed */
+    }
+    
+    .tools-section-header {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 1em;
+    }
+    
+    .tool {
+    display: flex;
+    justify-content: space-between; /* Ensures spacing between elements */
+    align-items: center; /* Vertical alignment */
+    margin-bottom: 1em; /* Space between tool entries */
+    }
+    
+    .tool-image {
+    max-width: 50px; /* Set the max width for the image */
+    margin-right: 25px;
+    margin-left: 50px;
+    }
+    
+    .tool-image img {
+    width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Rounded corners */
+    }
+    
+    .tool-title {
+    flex-grow: 1; /* Allows the title to fill the space */
+    display: flex; /* Make the title a flex container */
+    align-items: center; /* Align the pseudo-element vertically */
+    font-size: 1.8em;
+    color: #f2f2eb; /* Title color */
+    margin-right: 10px; /* Space before the arrow */
+    }
+    .tool-title:hover {
+        cursor: url('img/Jester_Hand_2.png'), auto;
+    }
+    .tool-title::after {
+    content: "⌄"; /* Unicode character for a down arrow */
+    margin-left: auto; /* Push the arrow to the end of the tool-title container */
+    font-size: 1.2em; /* Adjust size as needed */
+    transition: transform 0.3s; /* Animation for when toggled */
+    }
+    
+    .tool-info {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    background-color: #1c1c1e; /* Dark background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    color: #f2f2eb; /* Light text for readability */
+    }
+    
+    .tool-info.active {
+    max-height: 750px; /* Adjust as needed to fit content */
+    padding: 15px; /* Padding applied when expanded */
+    transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+    }
+    
+    .tool-info h4 {
+    text-align: center;
+    color: #e6e6e6; /* Slightly different color for the main heading */
+    margin-bottom: 20px; /* Spacing below the heading */
+    }
+    
+    .feature h5 {
+    font-size: 1.2em;
+    color: #f2f2eb; /* Color for subheadings */
+    margin-top: 15px; /* Spacing above each subheading */
+    margin-bottom: 10px; /* Spacing below each subheading */
+    }
+    .tool-description {
+    font-size: 1em;
+    color: #f2f2eb; /* Color for subheadings */
+    max-width: 50%;
+    align-content: center;
+    margin-top: 15px; /* Spacing above each subheading */
+    margin-bottom: 10px; /* Spacing below each subheading */
+    }
+    .feature p {
+    font-size: 1em;
+    line-height: 1.6; /* Good readability for body text */
+    margin-bottom: 15px; /* Spacing between paragraphs */
+    }
+    
+    .tool-images {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Wrap images to the next line on small screens */
+    gap: 10px; /* Spacing between images */
+    margin-top: 20px;
+    }
+    
+    .tool-images img {
+    max-width: calc(33.33% - 20px); /* Three images per row with spacing */
+    height: auto; /* Maintain aspect ratio */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Optional shadow for depth */
+    border-radius: 10px;
+    margin: 15px;
+    }
+    
+    @media (max-width: 480px) {
+    .tools-section {
+    padding: 20px 10px; /* Further reduced padding for very small screens */
+    }
+    
+    .tool-image {
+    margin: 0 auto; /* Center the image in its container */
+    display: block; /* Ensure the image is a block-level element */
+    }
+    
+    .tool-title {
+    font-size: 1.2em; /* Further reduce the font size for very small screens */
+    text-align: center; /* Center-align the title */
+    }
+    
+    .tool-description, .feature h5, .feature p {
+    font-size: 0.8em; /* Further adjust the font size for very small screens */
+    }
+    
+    .tool-images img {
+    max-width: 100%; /* Full width images on very small screens */
+    margin: 10px 0; /* Add some vertical space between images */
+    }
+    }
+    
+    /* ROADMAP SECTION */
+    
+    .roadmap-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the items horizontally */
+    gap: 20px; /* Space between the cards */
+    padding: 20px;
+    }
+    
+    .roadmap-card {
+    background-color: #222; /* Darker background for the card */
+    color: #ddd; /* Light text for better contrast */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners for the card */
+    width: calc(33.333% - 20px); /* Three items per row, minus the gap */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Subtle shadow for depth */
+    }
+    
+    .roadmap-card h3 {
+    color: #fff; /* Brighter color for the title */
+    margin-bottom: 15px; /* Space below the title */
+    }
+    
+    .roadmap-list {
+    list-style: none; /* Removes default list styling */
+    padding-left: 0; /* Aligns list with other text */
+    margin: 0; /* Remove default margin */
+    }
+    
+    .roadmap-list li {
+    margin-bottom: 10px; /* Space between each list item */
+    position: relative; /* For positioning the pseudo-element */
+    }
+    
+    .features-list {
+    list-style: none; /* Removes default list styling */
+    padding-left: 0; /* Aligns list with other text */
+    text-align: left; /* Aligns list items to the left */
+    }
+    
+    .features-list .about-highlight {
+    padding-left: 15px; /* Indent highlighted list items */
+    }
+    @media (max-width: 1025px) {
+        nav {
+            font-size: 20px; /* Smaller font size */
+            padding: 0.8em; /* Slightly less padding */
+        }
+        .logo-container {
+            transform: scale(0.7); /* Scale down the logo container */
+            transition: transform 0.5s ease; /* Smooth transition for the scaling */
+        }
+        .logo-container img {
+            max-width: 200px; /* Smaller logo */
+            transition: max-width 0.5s ease; /* Transition for resizing */
+        }
+        /* Possibly reduce spacing between nav links as well */
+        .nav-section a {
+            margin: 0 15px; /* Less margin */
+        }
+    }
+    
+    @media (max-width: 900px) {
+    nav {
+        justify-content: space-between; /* This will give space between logo and hamburger menu */
+        padding: 10px; /* Adjust padding as necessary */
+    }
+    .logo-container {
+        justify-content: flex-start;
+        /* Set the scale to the size you want when not scrolled */
+        transform: scale(0.8); /* Adjust this scaling factor as needed */
+        padding-left: 10px; /* Add padding to ensure logo is not sticking to the edge */
+    }
+    .logo-container img {
+        /* Remove max-width here to allow scaling */
+        width: auto; /* Maintain aspect ratio */
+    }
+    .nav-section {
+        display: none; /* Hide nav links */
+    }
+    .hamburger-menu {
+        display: block; /* Ensure hamburger menu is displayed */
+        position: absolute; /* Position it absolutely within the nav container */
+        right: 10px; /* Position it to the right */
+        top: 10px; /* Adjust top position as necessary */
+    }
+    headline-section {
+    flex-direction: column; /* Stack the items vertically on smaller screens */
+    }
+    .image-container {
+    margin: 10px auto; /* Adjust spacing for a vertical layout and center horizontally */
+    max-width: 30vw; /* Increase the max-width for smaller screens */
+    }
+    /* Adjust the scaled-down logo size when scrolled */
+    nav.scrolled .logo-container {
+        transform: scale(0.6); /* Scale down */
+    
+    }
+    }
+    .section {
+        font-family: 'Montserrat', serif;
+    
+    }
+    

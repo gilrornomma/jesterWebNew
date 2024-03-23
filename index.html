@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jester - Trading Tools</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">  
+    <link rel="stylesheet" href="https://use.typekit.net/guf2hfi.css">
+    <link rel="stylesheet" href="https://use.typekit.net/guf2hfi.css">
+    <link rel="stylesheet" href="img/styles.css">
+  
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+  <div id="overlay" style="z-index: 10;">
+    <nav>   
+        <div class="nav-section">
+            <a href="#About" class="navLink">About</a>
+            <a href="#JEST" class="navLink">$JEST</a>
+            <a href="#Tools" class="navLink">Tools</a>
+          </div>
+          <div class="logo-container">
+            <a href="#">
+                <img src="img/logo.png" alt="Jester Logo" class="logo">
+            </a>
+        </div>        
+          <div class="nav-section"> 
+            <a href="#Stats" class="navLink">Stats</a>
+            <a href="#Partners" class="navLink">Partners</a>
+            <a href="#" id="launch-app">Launch App</a> <!-- Added class navLink here -->
+          </div>
+        <div class="hamburger-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+        <!-- Collapsible Menu Container -->
+        <div class="menu-container">
+            <div class="nav-section">
+                <a href="#Info">About</a>
+                <a href="#JEST">$JEST</a>
+                <a href="#Tools">Tools</a>
+            </div>
+            <div class="nav-section"> 
+                <a href="#Stats">Stats</a>
+                <a href="#Partners">Partners</a>
+                <a href="#" id="launch-app">Launch App</a>
+            </div>
+        </div>
+
+    </nav>
+    
+    <div id="headline-section">
+        <div class="image-container active">
+            <img src="img/tg.png" alt="Join Public Animation" id="joinPublicImg" class="headline-image roundable">
+            <a class="headlineButton" id="joinPublicButton" href="https://t.me/JestTech" target="_blank">Join Public</a>
+        </div>
+  <div class="image-container active">
+    <img src="img/bot.png" alt="Bot Animation" id="botImg" class="headline-image roundable">
+    <a class="headlineButton" id="botButton" href="https://t.me/jestersignalsbot" target="_blank">Start Bot</a>
+  </div>
+  <div class="image-container active">
+    <img src="img/vip.png" alt="VIP Animation" id="vipImg" class="headline-image roundable">
+    <a class="headlineButton" id="vipButton" href="https://telegram.me/collablandbot?start=VFBDI1RFTCNDT01NIy0xMDAxOTIzMTIxNDA2" target="_blank">Join VIP</a>
+  </div>
+  
+</div>
+</div>
+
+    <div class="divider"></div>
+
+    <div class="social-links">
+        <a href="https://t.me/JestTech" target="_blank">
+            <img src="img/telegram-icon.png" alt="Telegram" class="social-logo">
+        </a>
+        <a href="https://x.com/JestTech" target="_blank">
+            <img src="img/twitter-icon.png" alt="Twitter" class="social-logo">
+        </a>
+        <a href="https://jester.gitbook.io/docs/" target="_blank">
+            <img src="img/gitbook-icon.png" alt="GitBook" class="social-logo">
+        </a>
+    </div>
+
+    <div class="divider"></div>
+    <div class="centered-container"> <!-- This will center the title -->
+        <p class="about-blurb">Jester, originally a formidable trading algorithm, is rapidly advancing into an expansive toolkit for both decentralized and centralized market participants. Marrying the foundational strength of traditional analysis with innovative technology, Jester is at the forefront of trading intelligence.</p>
+        <p class="about-blurb">As we look towards implementing auto-trading features and developing comprehensive tools for DEX and CEX traders, our vision is clear: to empower users to trade not just smartly, but with cutting-edge sophistication. </p>
+      </div>
+      
+    <section id="About" class="section about-section">
+        <h1 class="left-title">Trade Smart. Trade with Jester.</h1>
+        <div class="grid-container">
+            <div class="grid-item">
+              <h3 class="about-subtitle">Our Mission</h3>
+              <p class="about-text">To revolutionize trading through technology, Jester combines the precision of traditional methods with the power of modern algorithms and tools. Our mission is to make advanced trading accessible, providing traders with the tools they need to succeed in the fast-paced world of crypto.</p>
+            </div>
+      
+            <div class="grid-item">
+              <h3 class="about-subtitle">Our Tools</h3>
+              <p class="about-text">From predictive algorithms to comprehensive market analysis, our toolkit is designed for the trader who demands excellence. With Jester, access state-of-the-art features that bring clarity and opportunity to your trading strategy.</p>
+            </div>
+      
+            <div class="grid-item">
+              <h3 class="about-subtitle">Our Community</h3>
+                <p class="about-text">Join a thriving community of traders who share your passion for success. Jester is not just about individual success; it's about creating a collective where ideas, strategies, and insights multiply our strengths.</li>
+            </div>
+      
+            <div class="grid-item">
+              <h3 class="about-subtitle">Our Promise</h3>
+              <p class="about-text">We are committed to continuous innovation, ensuring that our users are always at the cutting edge of trading technology. With upcoming features like auto-trading, we promise to keep you ahead of the curve.</p>
+            </div>
+          </div> <!-- End of grid container -->
+          
+          <div class="roadmap-header">
+            <div class="line"></div>
+            <h2 class="left-title">Roadmap</h2>
+            <div class="line"></div>
+          </div>
+          
+          <div class="grid-container">
+            <div class="grid-item">
+              <h3 class="about-subtitle">Phase 1: Launch and Foundation</h3>
+              <ul class="roadmap-list">
+                <li>Jester v1 Algo</li>
+                <li>Develop Jester Telegram Bot</li>
+                <li>Fair-launch</li>
+                <li>Basic KOL marketing</li>
+                <li>Basic website</li>
+                <li>Algorithm Improvements</li>
+              </ul>
+            </div>
+          
+            <div class="grid-item">
+              <h3 class="about-subtitle">Phase 2: Expansion and Enhancement</h3>
+              <ul class="roadmap-list">
+                <li>Partnerships</li>
+                <li>Additional Feeds</li>
+                <li>TradingView indicator</li>
+                <li>Updated website</li>
+                <li>Additional algo improvements</li>
+                <li>Traditional finance (Tradfi) Feeds</li>
+                <li>Referral system</li>
+                <li>Trial system</li>
+              </ul>
+            </div>
+          
+            <div class="grid-item">
+              <h3 class="about-subtitle">Phase 3: Advanced Development and Integration</h3>
+              <ul class="roadmap-list">
+                <li>JEST Auto-trading fund</li>
+                <li>Jester: Rogue</li>
+                <li>Tier holder Auto-trading</li>
+                <li>Custom engine and platform</li>
+                <li>Portfolio viewer and manager</li>
+                <li>Trading education</li>
+                <li>Progressive Web App (PWA)</li>
+                <li>Jester AI</li>
+              </ul>
+            </div>
+
+        </div>
+      </section>
+      
+    <div class="divider"></div>
+    
+    <section class="jest-section" id="JEST">
+        <div class="jest-container">
+          <div class="jest-image">
+            <img src="img/jester-logo.png" alt="Jester Logo">
+          </div>
+          <div class="jest-info">
+            <h1 class="jest-section-title">Jester ($JEST)</h1>
+            <ul class="features-list">
+                <li><strong>Blockchain:</strong> Ethereum</li>
+                <li><strong>CA:</strong> <a href="https://etherscan.io/token/0xa4bc2b90743294e5e6fd3321a9a131947f7785db">0xa4bc2b90743294e5e6fd3321a9a131947f7785db</a></li>
+                <li><strong>Supply:</strong> 1,000,000 </li>
+                <li><strong>Liquidity:</strong> Burnt</li>
+                <li><strong>Mintable:</strong> No</li>
+                <li><strong>Tax:</strong> 2% B/S</li>
+              </ul>
+            </div>
+          </div>
+          <p class="jest-section-text">The $JEST token anchors Jester's innovative trading ecosystem, serving multiple utility roles and offering benefits for users. As the native token, it provides users with a stake in the platform, a means to access specialized features, and a way to engage with and benefit from the platform's growth. Integral to Jester's vision, the token empowers a seamless trading experience, with the assurance of a fixed supply and a built-in transaction tax aimed at enhancing the platform's value. As Jester broadens its horizons, the $JEST token stands at the center of user-centric advancement and shared success within the cryptocurrency trading community.</p>
+          <ul class="link-list">
+            <li><a href="https://www.dextools.io/app/en/ether/pair-explorer/0x98555273b697fa2b4cf3e009403b5ae31fd2c7a1?t=1710964161564" target="_blank">DexTools</a></li>
+            <li><a href="https://dexscreener.com/ethereum/0x98555273b697fa2b4cf3e009403b5ae31fd2c7a1" target="_blank">DexScreener</a></li>
+            <li><a href="https://birdeye.so/token/0xA4Bc2B90743294E5E6fd3321A9A131947f7785dB?chain=ethereum" target="_blank">Birdeye</a></li>
+            <li><a href="https://www.geckoterminal.com/eth/pools/0x98555273b697fa2b4cf3e009403b5ae31fd2c7a1" target="_blank">GeckoTerminal</a></li>
+            <li><a href="https://thesphynx.co/swap/eth/0x98555273b697fa2b4cf3e009403b5ae31fd2c7a1" target="_blank">SphynxLabs</a></li>
+            <li><a href="https://coinmarketcap.com/dexscan/ethereum/0x98555273b697fa2b4cf3e009403b5ae31fd2c7a1/" target="_blank">CoinMarketCap</a></li>
+            <li><a href="https://www.defined.fi/eth/0x98555273b697fa2b4cf3e009403b5ae31fd2c7a1" target="_blank">Defined</a></li>
+          </ul>
+          <div class="roadmap-header">
+            <div class="line"></div>
+            <h2 class="left-title">Tiers</h2>
+            <div class="line"></div>
+          </div>
+          
+        
+        <div class="tier-table jester-tiers-container">
+            <div class="tier-column jester-tier-column">
+                <h3 class="tier-title jester-tier-title">Starter - 2500 $JEST</h3>
+                <ul class="tier-list jester-tier-list">
+                    <li>Access to VIP chat</li>
+                    <li>Limited access to JesterBot</li>
+                    <li>Limited access to upcoming tools</li>
+                    <li class="tier-list-disabled">Unlimited access to JesterBot</li>
+                    <li class="tier-list-disabled">Access to RogueBot</li>
+                    <li class="tier-list-disabled">Auto-trading features</li>
+                </ul>
+            </div>
+            
+            <div class="tier-column jester-tier-column">
+                <h3 class="tier-title jester-tier-title">Standard - 5000 $JEST</h3>
+                <ul class="tier-list jester-tier-list">
+                    <li>Access to VIP chat</li>
+                    <li>Unlimited access to JesterBot</li>
+                    <li>Access to upcoming tools</li>
+                    <li>Access to RogueBot</li>
+                    <li class="tier-list-disabled">Jester TradingView Indicator</li>
+                    <li class="tier-list-disabled">Auto-trading features</li>
+                </ul>
+            </div>
+            
+            <div class="tier-column jester-tier-column">
+                <h3 class="tier-title jester-tier-title">Premium - 10000 $JEST</h3>
+                <ul class="tier-list jester-tier-list">
+                    <li>Access to VIP chat</li>
+                    <li>Unlimited access to JesterBot</li>
+                    <li>Access to upcoming tools</li>
+                    <li>Access to RogueBot</li>
+                    <li>Jester TradingView Indicator</li>
+                    <li>Auto-trading features</li>
+                </ul>
+            </div>
+        </div>
+        <p class="jest-section-text">Dev Note: Our commitment to shaping a prosperous future for our platform and the $JEST token remains unwavering. Currently, we are evaluating potential adjustments to our tier system and tokenomics to better align with our long-term growth objectives. It's important to note that while our current tier structure is up-to-date, modifications may be necessary to ensure the sustained growth and value of $JEST. We appreciate your understanding as we continue to make strategic decisions in the best interest of our community and the token's future.</p>
+        </section>
+
+    <div class="divider"></div>
+
+    <!-- Tool Section -->
+<section class="tools-section" id="Tools">
+    <h2 class="tools-section-header">Tools</h2>
+  
+    <!-- Tool 1 -->
+    <div class="tool" onclick="toggleInfo('tg-bot-info')">
+      <div class="tool-image">
+        <img src="img/bot_white.png" alt="Jester TG Bot">
+      </div>
+      <h3 class="tool-title">JesterBot: Your Telegram Command Center</h3>
+    </div>
+    <div id="tg-bot-info" class="tool-info">
+        <h2>Empower Your Trading with JesterBot's Cutting-Edge Features</h2>
+        <div class="feature">
+          <h5>Trial System</h5>
+          <p>Explore JesterBot’s capabilities with a free trial, gaining firsthand experience of its impact on your trading strategy without any initial commitment.</p>
+        </div>
+        <div class="feature">
+          <h5>Referral System</h5>
+          <p>Our referral program rewards your endorsements. Share the power of JesterBot, and earn as your referrals become active users.</p>
+        </div>
+        <div class="feature">
+          <h5>Precision Signals</h5>
+          <p>Real-time signals for select CEX and DEX pairs, empowering you to execute trades with confidence.</p>
+        </div>
+        <div class="feature">
+          <h5>Multi-Wallet Verification for Tier Holders</h5>
+          <p>Verify multiple wallets for a cohesive trading journey within JesterBots ecosystem.</p>
+        </div>
+        <div class="feature">
+          <h5>Customized Trading Experience</h5>
+          <p>JesterBot adapts to you. Customize your interactions to suit your trading style.</p>
+        </div>
+        <div class="tool-images">
+          <img src="img/TG_1.png" alt="Feature Image 1">
+          <img src="img/TG_2.png" alt="Feature Image 2">
+          <img src="img/TG_3.png" alt="Feature Image 3">
+        </div>
+      </div>
+      
+      
+    
+    <div class="divider"></div>
+  
+    <!-- Tool 2 -->
+    <div class="tool" onclick="toggleInfo('tradingview-indicator-info')">
+        <div class="tool-image">
+          <img src="img/TV.png" alt="Jester TradingView Indicator">
+        </div>
+        <h3 class="tool-title">Jester TradingView Indicator: Visualize the Strategy</h3>
+      </div>
+      <div id="tradingview-indicator-info" class="tool-info">
+        <h2>Elevate Your Analysis with the Jester Indicator's Precision Insights</h2>
+        <div class="feature">
+          <h5>Seamless Integration with TradingView</h5>
+          <p>Leverage the power of the Jester Indicator directly within TradingView, providing you with advanced analytical capabilities at your fingertips. Its seamless integration ensures you can apply it to any chart instantly, enhancing your market analysis without leaving your preferred trading environment.</p>
+        </div>
+        <div class="feature">
+          <h5>Advanced Market Insights</h5>
+          <p>Unlock a new dimension of market understanding with the Jester Indicator. It combines multiple analysis techniques into one comprehensive tool, offering you insights into market trends, potential reversals, and key entry and exit points. Navigate the complexities of the market with enhanced clarity and confidence.</p>
+        </div>
+        <div class="feature">
+          <h5>Custom Alert System</h5>
+          <p>Maximize your trading strategy with the Jester Indicator's alert system, fully integrated via TradingView. This feature allows you to leverage TradingView’s robust alert capabilities, enabling you to set personalized notifications for any asset supported by TradingView. Whether you’re monitoring price movements, trend reversals, or specific indicator conditions, you can rely on timely alerts to keep you informed and ready to act on every trading opportunity.</p>
+        </div>
+        <div class="feature">
+          <h5>Intuitive Visual Experience</h5>
+          <p>Experience market data like never before with the Jester Indicator's intuitive visual design. Its clear, user-friendly interface translates complex information into easily understandable visual cues, helping you make informed decisions swiftly and efficiently.</p>
+        </div>
+        <div class="feature">
+          <h5>Continuous Updates and Support</h5>
+          <p>The Jester Indicator is constantly evolving, with regular updates and improvements based on user feedback and market trends. Enjoy dedicated support and a community of users, ensuring that you have all the resources you need to maximize your trading potential.</p>
+        </div>
+        <div class="tool-images">
+          <img src="img/Indicator_1.png" alt="Feature Image 1">
+          <img src="img/Indicator_2.png" alt="Feature Image 2">
+          <img src="img/Indicator_3.png" alt="Feature Image 3">
+        </div>
+      </div>
+      
+    
+    <div class="divider"></div>
+    
+    <!-- Tool 3 -->
+    <div class="tool" onclick="toggleInfo('rogue-info')">
+        <div class="tool-image">
+            <img src="img/redacted.png" alt="Rogue On-Chain Mastery">
+        </div>
+        <h3 class="tool-title">Jester Rogue: Secrets of Post-Launch Trading</h3>
+    </div>
+    <div id="rogue-info" class="tool-info">
+        <h2>Discover the Edge in New Launches</h2>
+        <div class="feature">
+          <h5>Specialize in Optimal Entry Points</h5>
+          <p>Rogue is designed to identify the best moments to enter new coin launches, providing a strategic advantage in the fast-paced world of on-chain trading.</p>
+        </div>
+        <div class="feature">
+          <h5>Capitalize on Early Moves</h5>
+          <p>Seize early opportunities with Rogue's analysis, targeting moments just after initial market volatility to find entry points that could lead to significant gains.</p>
+        </div>
+        <div class="feature">
+          <h5>Precision Signals for Smart Holdings</h5>
+          <p>Rogue provides precision signals for diversifying your portfolio with new coins, equipping you with the knowledge to make informed decisions on both short-term trades and long-term holds.</p>
+        </div>
+        <div class="feature">
+          <h5>Navigate New Coin Complexity</h5>
+          <p>With its sophisticated algorithm, Rogue navigates the complexities of new coin launches and highlights the most promising entry points for traders.</p>
+        </div>
+        <div class="feature">
+          <h5>Elevate Your On-Chain Strategy</h5>
+          <p>Rogue is an essential tool for traders looking to elevate their on-chain strategy and stay ahead in the fast-moving cryptocurrency launch space.</p>
+        </div>
+        <h2>COMING SOON</h2>
+        <div class="tool-images">
+        </div>
+    </div>
+
+    <div class="divider"></div>
+  
+    <div class="tool">
+      <p class="jest-section-text">
+        More tools are on the horizon. We are continuously working to bring the latest in trading technology to our platform. Stay connected for exciting updates and enhancements that will redefine your trading experience.
+      </p>
+    </div>
+  </section>
+  
+    <div class="divider"></div>    
+    <section class="section" id="Stats">
+        <h2 class="tools-section-header">Statistics</h2>
+        <div class="about-blurb">
+            <p class="feature"> We are currently undergoing a complete rework of our statistics calculations and backend. We will be looking to have them full updated as soon as possible. </p>
+          </div>
+    </section>
+    
+    <div class="divider"></div>
+
+    <!-- Tool 3<div id="Partners" class="section">Partners Section Content</div>   
+    <div class="divider"></div> --> 
+
+  <footer>
+    <div class="footer-links">
+      <a href="https://t.me/JestTech" target="_blank">Telegram</a> |
+      <a href="https://x.com/JestTech" target="_blank">Twitter</a> |
+      <a href="https://www.youtube.com/@JesterTechnologies" target="_blank">YouTube</a> |
+      <a href="https://tiktok.com/@jesttech" target="_blank">TikTok</a> |
+      <a href="https://instagram.com/jesttech" target="_blank">Instagram</a> |
+      <a href="https://medium.com/@JestTech" target="_blank">Medium</a> |
+      <a href="https://jester.gitbook.io/docs/" target="_blank">GitBook</a>
+    </div>
+    <div class="footer-disclaimer">
+      <p>Trading cryptocurrencies involves significant risk and potential financial loss. Jester does not promise or guarantee profits or specific trading outcomes.</p>
+      <p>Services are provided for informational and educational purposes only and do not constitute financial advice.</p>
+      <p>You are solely responsible for your trading decisions and should seek professional trading advice before interacting with Jester or any other derivation of.</p>
+      <p>Interacting with Jester in any way means you agree to the terms. Please review the terms from time to time because they are binding on you.</p>
+      <h3>©2024 JESTER ALL RIGHTS RESERVED</h3>
+      <div class="footer-links"><a href="https://jester.gitbook.io/docs/faq/terms-and-conditions" target="_blank">Terms & Conditions</a></div>
+    </div>
+
+  </footer>
+
+  <script src="scripts.js">
+    
+  </script>
+</body>
+</html>
